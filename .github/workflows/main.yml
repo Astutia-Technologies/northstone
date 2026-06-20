@@ -17,11 +17,6 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - name: Setup npm
-      uses: npm/action-setup@v4
-      with:
-        version: 10.23.0
-        run_install: false
     - uses: actions/cache@v4
       with:
         # See here for caching with `yarn`, `bun` or other package managers https://github.com/actions/cache/blob/main/examples.md or you can leverage caching with actions/setup-node https://github.com/actions/setup-node
@@ -46,5 +41,5 @@ jobs:
     - name: Copy files to app directory and build
       run: |
         cp -r * /var/www/nsproperties && cd /var/www/nsproperties
-        pm2 stop all && npm i && npm run nsproperties
-        pm2 restart all
+        npm install && npm run build
+        pm2 restart nsproperties
